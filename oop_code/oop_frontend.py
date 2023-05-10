@@ -13,21 +13,21 @@ The following functions can be used in this program:
 from tkinter import *
 from oop_backend import Database
 
-# here we called the database from the oop_backend.py file and this is where you will call the file name.
-#the positional arguemnt here is the database file and that will be translated into the backend file under the argument 'db'
-#the 'db' in the backend file will then be running the database file
 database = Database('books.db')
 
+#add the view command
 def view_command():
     list1.delete(0,END)
     for fetch in database.view():
         list1.insert(END, fetch)
 
+#add the search command
 def search_command():
     list1.delete(0,END)
     for fetch in database.search(title_text.get(), author_text.get(), year_text.get(), isbn_text.get()):
         list1.insert(END, fetch)
 
+#add the add command
 def add_command():
     database.insert(title_text.get(), author_text.get(), year_text.get(), isbn_text.get())
     list1.delete(0,END)
@@ -47,20 +47,24 @@ def get_selected(event):
         e4.delete(0,END)
         e4.insert(END,select_tuple[4])
 
+# add the delete command
 def delete_command():
     database.delete(select_tuple[0])
 
+#add the update command
 def update_command():
     database.update(select_tuple[0],title_text.get(), author_text.get(), year_text.get(), isbn_text.get())
 
 
 
-
+#create the GUI
 window = Tk()
+
 
 def bookstore():
     print()
 
+#create the entire frontend design
 l1 = Label(window, text= "Title", justify= 'center')
 l1.grid(row=0, column=0)
 
